@@ -15,5 +15,21 @@
  */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { hello } from './example-module';
+import { checkInventoryAndSendEmail } from './inventory';
+
+/**
+ * OnOpen trigger to add a custom menu.
+ */
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('Inventory Tools')
+    .addItem('Check Inventory Levels', 'checkInventoryAndSendEmail')
+    .addToUi();
+}
+
+// Expose functions to the global scope for Google Apps Script
+const global = globalThis as unknown as Record<string, Function>;
+global.onOpen = onOpen;
+global.checkInventoryAndSendEmail = checkInventoryAndSendEmail;
 
 console.log(hello());
