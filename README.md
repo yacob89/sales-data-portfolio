@@ -18,6 +18,7 @@ Every growing retail and e-commerce business relies heavily on spreadsheets to m
 Instead of relying on fragile, uncompiled scripts edited directly in the browser, this portfolio application treats Google Apps Script as a compiled, fully typed deployment target. Built with TypeScript, bundled using Rollup, and tested with Jest, it delivers real-time inventory monitoring, custom spreadsheet menus, and automated email alerts wrapped in an automated multi-environment deployment pipeline (`clasp`).
 
 ---
+<img width="1849" height="1102" alt="Screenshot from 2026-07-13 10-07-45 (Edit)" src="https://github.com/user-attachments/assets/0664f1d3-ea70-48ff-9d96-c00394563e07" />
 
 ## ✨ Key Features & Business Impact
 
@@ -28,6 +29,7 @@ Instead of relying on fragile, uncompiled scripts edited directly in the browser
 - 🧪 **Zero-Breakage CI Workflow**: Strict unit testing via Jest and static linting via ESLint/Prettier to block bad code from reaching production sheets.
 
 ---
+<img width="1849" height="1098" alt="Screenshot from 2026-07-13 10-10-05 (Edit)" src="https://github.com/user-attachments/assets/64ee580b-c914-44db-b7e8-1f12efc23688" />
 
 ## 🏗️ Technical Stack
 
