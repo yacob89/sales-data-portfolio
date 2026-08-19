@@ -18,7 +18,6 @@ interface InventoryItem {
   storeId: string | number;
   productId: string | number;
   category: string | number;
-  productName: string | number;
   level: number;
 }
 
@@ -41,10 +40,6 @@ export function checkInventoryAndSendEmail() {
   const storeIdIdx = headers.indexOf('Store ID');
   const productIdIdx = headers.indexOf('Product ID');
   const categoryIdx = headers.indexOf('Category');
-  const productNameIdx =
-    headers.indexOf('Product Name') !== -1
-      ? headers.indexOf('Product Name')
-      : headers.indexOf('Product');
 
   if (inventoryLevelIdx === -1) {
     throw new Error(
@@ -66,10 +61,6 @@ export function checkInventoryAndSendEmail() {
           productIdIdx !== -1 ? (row[productIdIdx] as string | number) : 'N/A',
         category:
           categoryIdx !== -1 ? (row[categoryIdx] as string | number) : 'N/A',
-        productName:
-          productNameIdx !== -1
-            ? (row[productNameIdx] as string | number)
-            : 'N/A',
         level: level,
       });
     }
@@ -92,21 +83,50 @@ function sendInventoryEmail(items: InventoryItem[]) {
   const recipient = Session.getActiveUser().getEmail();
   const subject = 'Low Inventory Alert - Action Required';
 
-  let body = 'The following products have inventory levels below 50:\n\n';
+  const rows = items
+    .map(
+      item => `
+    <tr>
+           <td>${item.storeId}</td>
+           <td>${item.productId}</td>
+           <td>${item.category}</td>
+           <td>${item.level}</td>
+         </tr>`
+    )
+    .join('');
 
-  items.forEach(item => {
-    body += `Product: ${item.productName}\n`;
-    body += `Store ID: ${item.storeId}\n`;
-    body += `Product ID: ${item.productId}\n`;
-    body += `Category: ${item.category}\n`;
-    body += `Current Level: ${item.level}\n`;
-    body += '---------------------------\n';
-  });
-
-  body += '\nPlease check the inventory levels in the spreadsheet.';
+  const htmlBody = `
+     <html>
+       <head>
+         <style>
+           table { border-collapse: collapse; width: 100%; font-family: Arial, sans-serif; }
+           th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+           th { background-color: #f2f2f2; }
+           tr:nth-child(even) { background-color: #f9f9f9; }
+           h2 { color: #b00000; font-family: Arial, sans-serif; }
+           p { font-family: Arial, sans-serif; }
+         </style>
+       </head>
+       <body>
+         <h2>Heads up: Some items are running low</h2>
+         <p>The following items are at or below the low-stock threshold:</p>
+         <table>
+           <tr>
+             <th>Store Id</th>
+             <th>Product Id</th>
+             <th>Category</th>
+             <th>Stock</th>
+           </tr>
+           ${rows}
+         </table>
+         <p>Please check the inventory levels in the spreadsheet.</p>
+       </body>
+     </html>`;
 
   if (recipient) {
-    MailApp.sendEmail(recipient, subject, body);
+    MailApp.sendEmail(recipient, subject, '', {
+      htmlBody: htmlBody,
+    });
     console.log(`Email sent to ${recipient} with ${items.length} items.`);
   } else {
     console.error('Could not determine recipient email address.');

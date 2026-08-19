@@ -70,12 +70,34 @@ describe('inventory', () => {
     expect(mockMailApp.sendEmail).toHaveBeenCalledWith(
       'test@example.com',
       'Low Inventory Alert - Action Required',
-      expect.stringContaining('Prod1')
+      '',
+      expect.objectContaining({
+        htmlBody: expect.stringContaining('S1'),
+      })
     );
     expect(mockMailApp.sendEmail).toHaveBeenCalledWith(
       expect.any(String),
       expect.any(String),
-      expect.stringContaining('40')
+      expect.any(String),
+      expect.objectContaining({
+        htmlBody: expect.stringContaining('40'),
+      })
+    );
+    expect(mockMailApp.sendEmail).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.any(String),
+      expect.any(String),
+      expect.objectContaining({
+        htmlBody: expect.stringContaining('P1'),
+      })
+    );
+    expect(mockMailApp.sendEmail).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.any(String),
+      expect.any(String),
+      expect.objectContaining({
+        htmlBody: expect.stringContaining('Cat1'),
+      })
     );
     expect(mockMailApp.sendEmail).not.toEqual(expect.stringContaining('Prod2'));
   });
