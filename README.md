@@ -1,4 +1,4 @@
-# 🚀 Sales Data & Automated Inventory Engine
+# 🚀 Automated Inventory Engine
 ### Enterprise-Grade Google Apps Script & TypeScript Workflow
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
