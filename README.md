@@ -29,7 +29,7 @@ Instead of relying on fragile, uncompiled scripts edited directly in the browser
 - 🧪 **Zero-Breakage CI Workflow**: Strict unit testing via Jest and static linting via ESLint/Prettier to block bad code from reaching production sheets.
 
 ---
-<img width="1849" height="1098" alt="Screenshot from 2026-07-13 10-10-05 (Edit)" src="https://github.com/user-attachments/assets/64ee580b-c914-44db-b7e8-1f12efc23688" />
+<img width="3298" height="1940" alt="chrome_NZlBcqs8yC" src="https://github.com/user-attachments/assets/0c850f8c-9784-4583-a628-b9cfa9513024" />
 
 ## 🏗️ Technical Stack
 
